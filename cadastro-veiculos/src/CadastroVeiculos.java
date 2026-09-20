@@ -1,0 +1,75 @@
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Funciona como um "banco de dados em memória" e concentra as regras de negócio:
+ * validação de ano, validação de placa duplicada, listagem e consulta.
+ */
+public class CadastroVeiculos {
+
+    public static final int ANO_MINIMO = 1900;
+
+    private final List<Veiculo> veiculos = new ArrayList<>();
+
+    /** Ano máximo permitido: ano atual + 1. */
+    public static int getAnoMaximo() {
+        return LocalDate.now().getYear() + 1;
+    }
+
+    /** Padroniza a placa: remove espaços e hífen e converte para maiúsculas. */
+    public static String normalizarPlaca(String placa) {
+        return placa == null ? "" : placa.trim().replace("-", "").toUpperCase();
+    }
+
+    public boolean anoValido(int ano) {
+        return ano >= ANO_MINIMO && ano <= getAnoMaximo();
+    }
+
+    public boolean placaExiste(String placa) {
+        return consultarPorPlaca(placa).isPresent();
+    }
+
+    /**
+     * Cadastra um veículo após validar os dados.
+     *
+     * @throws IllegalArgumentException se algum dado for inválido ou a placa já existir
+     */
+    public void cadastrar(String marca, String modelo, int ano, String placa) {
+        String placaNormalizada = normalizarPlaca(placa);
+
+        if (marca == null || marca.isBlank()) {
+            throw new IllegalArgumentException("A marca não pode ser vazia.");
+        }
+        if (modelo == null || modelo.isBlank()) {
+            throw new IllegalArgumentException("O modelo não pode ser vazio.");
+        }
+        if (placaNormalizada.isEmpty()) {
+            throw new IllegalArgumentException("A placa não pode ser vazia.");
+        }
+        if (!anoValido(ano)) {
+            throw new IllegalArgumentException(
+                    "Ano inválido. Informe um ano entre " + ANO_MINIMO + " e " + getAnoMaximo() + ".");
+        }
+        if (placaExiste(placaNormalizada)) {
+            throw new IllegalArgumentException(
+                    "Já existe um veículo cadastrado com a placa " + placaNormalizada + ".");
+        }
+
+        veiculos.add(new Veiculo(marca.trim(), modelo.trim(), ano, placaNormalizada));
+    }
+
+    /** Retorna uma visão somente leitura dos veículos cadastrados. */
+    public List<Veiculo> listar() {
+        return Collections.unmodifiableList(veiculos);
+    }
+
+    public Optional<Veiculo> consultarPorPlaca(String placa) {
+        String placaNormalizada = normalizarPlaca(placa);
+        return veiculos.stream()
+                .filter(v -> v.getPlaca().equals(placaNormalizada))
+                .findFirst();
+    }
+}
