@@ -4,10 +4,10 @@ Sistema de console em Java (POO) para cadastrar, listar e consultar veículos.
 Os dados ficam apenas em memória (`List<Veiculo>`) e são perdidos ao encerrar o programa.
 
 ## Integrantes
-- Arthur Saggin
-- João Isaque
-- Nycolas Campos
-- Lucas Varal
+- Arthur Saggin 1139361
+- João Isaque 1139559   
+- Nycolas Campos 1139527
+- Lucas Varal 1136676
 
 ## Estrutura
 ```

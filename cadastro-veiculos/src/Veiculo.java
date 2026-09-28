@@ -1,7 +1,3 @@
-/**
- * Representa um veículo cadastrado no sistema.
- * Os atributos são privados (encapsulamento) e acessados por getters.
- */
 public class Veiculo {
 
     private final String marca;

@@ -3,9 +3,7 @@ import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.Scanner;
 
-/**
- * Interface de console do sistema de Cadastro de Veículos.
- */
+
 public class Main {
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -45,9 +43,6 @@ public class Main {
         System.out.println();
     }
 
-    // ---------------------------------------------------------------
-    // 1 - Cadastrar
-    // ---------------------------------------------------------------
     private static void cadastrarVeiculo() {
         System.out.println("\n--- Cadastrar Veículo ---");
         System.out.println("(deixe um campo em branco para cancelar)\n");
@@ -84,7 +79,6 @@ public class Main {
         }
     }
 
-    /** Pede o ano até que seja válido. Retorna null se o usuário cancelar. */
     private static Integer lerAnoValido() {
         while (true) {
             String entrada = lerTexto("Ano (" + CadastroVeiculos.ANO_MINIMO + " a "
@@ -105,7 +99,6 @@ public class Main {
         }
     }
 
-    /** Pede a placa até que não exista duplicidade. Retorna null se o usuário cancelar. */
     private static String lerPlacaDisponivel() {
         while (true) {
             String placa = lerTexto("Placa: ");
@@ -120,9 +113,6 @@ public class Main {
         }
     }
 
-    // ---------------------------------------------------------------
-    // 2 - Listar
-    // ---------------------------------------------------------------
     private static void listarVeiculos() {
         System.out.println("\n--- Veículos Cadastrados ---");
         List<Veiculo> veiculos = cadastro.listar();
@@ -150,9 +140,6 @@ public class Main {
         System.out.println("\nTotal: " + veiculos.size() + " veículo(s).");
     }
 
-    // ---------------------------------------------------------------
-    // 3 - Consultar
-    // ---------------------------------------------------------------
     private static void consultarVeiculo() {
         System.out.println("\n--- Consultar Veículo ---");
         String placa = lerTexto("Informe a placa: ");
@@ -167,9 +154,6 @@ public class Main {
         }
     }
 
-    // ---------------------------------------------------------------
-    // Utilitários de leitura
-    // ---------------------------------------------------------------
     private static String lerTexto(String mensagem) {
         System.out.print(mensagem);
         return scanner.nextLine().trim();

@@ -4,22 +4,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Funciona como um "banco de dados em memória" e concentra as regras de negócio:
- * validação de ano, validação de placa duplicada, listagem e consulta.
- */
+
 public class CadastroVeiculos {
 
     public static final int ANO_MINIMO = 1900;
 
     private final List<Veiculo> veiculos = new ArrayList<>();
 
-    /** Ano máximo permitido: ano atual + 1. */
     public static int getAnoMaximo() {
         return LocalDate.now().getYear() + 1;
     }
 
-    /** Padroniza a placa: remove espaços e hífen e converte para maiúsculas. */
     public static String normalizarPlaca(String placa) {
         return placa == null ? "" : placa.trim().replace("-", "").toUpperCase();
     }
@@ -32,8 +27,6 @@ public class CadastroVeiculos {
         return consultarPorPlaca(placa).isPresent();
     }
 
-    /**
-     * Cadastra um veículo após validar os dados.
      *
      * @throws IllegalArgumentException se algum dado for inválido ou a placa já existir
      */
