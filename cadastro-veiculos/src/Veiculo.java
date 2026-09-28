@@ -1,9 +1,9 @@
 public class Veiculo {
 
-    private final String marca;
-    private final String modelo;
-    private final int ano;
-    private final String placa;
+    private String marca;
+    private String modelo;
+    private int ano;
+    private String placa;
 
     public Veiculo(String marca, String modelo, int ano, String placa) {
         this.marca = marca;
@@ -28,9 +28,10 @@ public class Veiculo {
         return placa;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Marca: %-12s | Modelo: %-15s | Ano: %d | Placa: %s",
-                marca, modelo, ano, placa);
+    public void exibir() {
+        System.out.println("Marca: " + marca);
+        System.out.println("Modelo: " + modelo);
+        System.out.println("Ano: " + ano);
+        System.out.println("Placa: " + placa);
     }
 }

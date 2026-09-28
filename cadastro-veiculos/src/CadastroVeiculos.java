@@ -27,9 +27,6 @@ public class CadastroVeiculos {
         return consultarPorPlaca(placa).isPresent();
     }
 
-     *
-     * @throws IllegalArgumentException se algum dado for inválido ou a placa já existir
-     */
     public void cadastrar(String marca, String modelo, int ano, String placa) {
         String placaNormalizada = normalizarPlaca(placa);
 
@@ -54,7 +51,6 @@ public class CadastroVeiculos {
         veiculos.add(new Veiculo(marca.trim(), modelo.trim(), ano, placaNormalizada));
     }
 
-    /** Retorna uma visão somente leitura dos veículos cadastrados. */
     public List<Veiculo> listar() {
         return Collections.unmodifiableList(veiculos);
     }
